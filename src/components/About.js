@@ -1,8 +1,44 @@
 // components/About.js
 "use client";
 import { motion } from "framer-motion";
+import { useLanguage } from "../context/LanguageContext";
+
+const aboutCopy = {
+  en: {
+    heading: { lead: "About ", accent: "Me" },
+    badge: "Who I Am",
+    intro:
+      "I'm Temuulen, a full-stack and mobile developer from Mongolia. I specialize in building modern web applications, mobile apps, and custom business software using Next.js, Node.js, Express, Flutter, MongoDB, Firebase, and Tailwind.",
+    passion:
+      "I love solving real problems, creating products people actually use, and delivering clean, scalable applications.",
+    stats: [
+      { number: "2+", text: "Years Mobile Development Experience" },
+      { number: "1+", text: "Years Full-Stack Experience" },
+      { number: "10+", text: "Projects Completed" },
+      { number: "4+", text: "Hackathon Wins" },
+    ],
+  },
+  mn: {
+    heading: { lead: "Намайг ", accent: "танилцуулъя" },
+    badge: "Би хэн бэ",
+    intro:
+      "Би бол Монгол улсын гаралтай full-stack болон мобайл апп хөгжүүлэгч Тэмүүлэн. Next.js, Node.js, Express, Flutter, MongoDB, Firebase, Tailwind зэрэг технологиор орчин үеийн веб апп, мобайл апп болон бизнесийн зориулалттай тусгай шийдлүүдийг бүтээдэг.",
+    passion:
+      "Бодит асуудлыг шийдэх, хүмүүсийн өдөр тутам ашигладаг бүтээгдэхүүн хөгжүүлэх, цэвэр бүтэцтэй бөгөөд өргөтгөх боломжтой систем бүтээхэд дуртай.",
+    stats: [
+      { number: "2+", text: "Мобайл хөгжүүлэлтийн туршлага (жил)" },
+      { number: "1+", text: "Full-stack хөгжүүлэлтийн туршлага (жил)" },
+      { number: "10+", text: "Гүйцэт дуусгасан төсөл" },
+      { number: "4+", text: "Хакатонуудад гаргасан амжилт" },
+    ],
+  },
+};
+
 
 export default function About() {
+  const { language } = useLanguage();
+  const copy = aboutCopy[language];
+
   return (
     <section id="about" className="py-20 px-4">
       <div className="max-w-4xl mx-auto">
@@ -12,7 +48,8 @@ export default function About() {
           transition={{ duration: 0.8 }}
           className="text-4xl md:text-5xl font-bold text-center mb-16"
         >
-          About <span className="text-blue-400">Me</span>
+          {copy.heading.lead}
+          <span className="text-blue-400">{copy.heading.accent}</span>
         </motion.h2>
 
         <div className="grid md:grid-cols-2 gap-12 items-center">
@@ -23,16 +60,10 @@ export default function About() {
           >
             <div className="bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl p-1">
               <div className="bg-black rounded-2xl p-8 h-full">
-                <h3 className="text-2xl font-bold mb-4">Who I Am</h3>
-                <p className="text-gray-300 leading-relaxed">
-                  I'm Temuulen, a full-stack and mobile developer from Mongolia.
-                  I specialize in building modern web applications, mobile apps,
-                  and custom business software using Next.js, Node.js, Express,
-                  Flutter, MongoDB, Firebase, and Tailwind.
-                </p>
+                <h3 className="text-2xl font-bold mb-4">{copy.badge}</h3>
+                <p className="text-gray-300 leading-relaxed">{copy.intro}</p>
                 <p className="text-gray-300 leading-relaxed mt-4">
-                  I love solving real problems, creating products people
-                  actually use, and delivering clean, scalable applications.
+                  {copy.passion}
                 </p>
               </div>
             </div>
@@ -44,12 +75,7 @@ export default function About() {
             transition={{ duration: 0.8 }}
             className="space-y-6"
           >
-            {[
-              { number: "2+", text: "Years Mobile Development Experience" },
-              { number: "1+", text: "Years Full-Stack Experience" },
-              { number: "10+", text: "Projects Completed" },
-              { number: "4+", text: "Hackathon Wins" },
-            ].map((stat, index) => (
+            {copy.stats.map((stat, index) => (
               <motion.div
                 key={stat.text}
                 initial={{ opacity: 0, y: 20 }}

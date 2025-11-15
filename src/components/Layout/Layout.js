@@ -1,20 +1,15 @@
 // components/Layout/Layout.js
 "use client";
-import { motion } from "framer-motion";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 
 export default function Layout({ children }) {
   return (
-    <div className="min-h-screen bg-black text-white">
+    <div className="min-h-screen bg-black text-white overflow-x-hidden max-w-full">
       <Navbar />
-      <motion.main
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.5 }}
-      >
+      <main className="overflow-x-hidden max-w-full">
         {children}
-      </motion.main>
+      </main>
       <Footer />
     </div>
   );
