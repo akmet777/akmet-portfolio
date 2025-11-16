@@ -13,6 +13,7 @@ const navCopy = {
       { name: "Projects", path: "/projects" },
       { name: "Services", path: "/services" },
       { name: "Contact", path: "/contact" },
+      { name: "Terminal", path: "/terminal" },
     ],
     toggle: "MN",
   },
@@ -23,6 +24,7 @@ const navCopy = {
       { name: "Төсөл", path: "/projects" },
       { name: "Үйлчилгээ", path: "/services" },
       { name: "Холбоо", path: "/contact" },
+      { name: "Терминал", path: "/terminal" },
     ],
     toggle: "EN",
   },
@@ -88,6 +90,14 @@ export default function Navbar() {
           strokeLinejoin="round"
           strokeWidth={2}
           d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+        />
+      ),
+      "/terminal": (
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth={2}
+          d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
         />
       ),
     };
@@ -157,7 +167,7 @@ export default function Navbar() {
                     >
                       {getIcon(item.path)}
                     </svg>
-                    {item.name}
+                    <span suppressHydrationWarning>{item.name}</span>
                   </span>
                   {pathname !== item.path && (
                     <motion.div
@@ -329,7 +339,7 @@ export default function Navbar() {
                                 : "text-gray-300"
                             }`}
                           >
-                            {item.name}
+                            <span suppressHydrationWarning>{item.name}</span>
                           </span>
                           {pathname === item.path && (
                             <motion.div

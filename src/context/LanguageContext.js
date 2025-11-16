@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useContext, useCallback, useMemo, useState } from "react";
+import { createContext, useContext, useCallback, useMemo, useState, useEffect } from "react";
 
 const LanguageContext = createContext(null);
 
@@ -18,8 +18,19 @@ function getInitialLanguage() {
 }
 
 export function LanguageProvider({ children }) {
-  // Initialize with function to read from localStorage immediately
-  const [language, setLanguage] = useState(() => getInitialLanguage());
+  // Always start with default language to prevent hydration mismatch
+  // Then sync with localStorage after mount
+  const [language, setLanguage] = useState("mn");
+  const [isMounted, setIsMounted] = useState(false);
+
+  // Sync with localStorage after mount to prevent hydration mismatch
+  useEffect(() => {
+    setIsMounted(true);
+    const stored = window.localStorage.getItem("portfolio-language");
+    if (stored === "en" || stored === "mn") {
+      setLanguage(stored);
+    }
+  }, []);
 
   const switchLanguage = useCallback((lang) => {
     setLanguage(lang);

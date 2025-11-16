@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
 import { useLanguage } from "../context/LanguageContext";
+import emailjs from "@emailjs/browser";
 
 const contactCopy = {
   en: {
@@ -28,6 +29,10 @@ const contactCopy = {
         message: "Tell me about your project...",
       },
       submit: "Send Message",
+      sending: "Sending...",
+      success: "Message sent successfully!",
+      error: "Failed to send message. Please try again.",
+      errorDetails: "Error details:",
     },
   },
   mn: {
@@ -53,6 +58,10 @@ const contactCopy = {
         message: "Төслийнхөө талаар бичээрэй...",
       },
       submit: "Мессеж илгээх",
+      sending: "Илгээж байна...",
+      success: "Мессеж амжилттай илгээгдлээ!",
+      error: "Мессеж илгээхэд алдаа гарлаа. Дахин оролдоно уу.",
+      errorDetails: "Алдааны мэдээлэл:",
     },
   },
 };
@@ -67,17 +76,104 @@ export default function Contact() {
     subject: "",
     message: "",
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState(null); // 'success' | 'error' | null
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleChange = (e) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
     });
+    // Clear status when user starts typing
+    if (submitStatus) setSubmitStatus(null);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Form submitted:", formData);
+    setIsSubmitting(true);
+    setSubmitStatus(null);
+
+    try {
+      // EmailJS configuration
+      const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID;
+      const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID; 
+      const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY;
+
+      // Check if credentials are set
+      if (!serviceId || !templateId || !publicKey) {
+        throw new Error("EmailJS credentials not configured. Please check your .env.local file.");
+      }
+
+      // Send email using EmailJS
+      // Include recipient email as template parameter (some services require this)
+      const templateParams = {
+        to_email: "norovpeltemuulen@gmail.com", // Recipient email
+        from_name: formData.name,
+        from_email: formData.email,
+        subject: formData.subject,
+        message: formData.message,
+        reply_to: formData.email, // This allows you to reply directly to the sender
+      };
+
+      console.log("Sending email with:", { 
+        serviceId, 
+        templateId, 
+        publicKey: publicKey?.substring(0, 10) + "...",
+        templateParams 
+      });
+
+      const result = await emailjs.send(
+        serviceId,
+        templateId,
+        templateParams,
+        publicKey
+      );
+
+      console.log("EmailJS result:", result);
+
+      // Success
+      if (result.status === 200 || result.text === "OK") {
+        setSubmitStatus("success");
+        setFormData({ name: "", email: "", subject: "", message: "" });
+        
+        // Clear success message after 5 seconds
+        setTimeout(() => setSubmitStatus(null), 5000);
+      } else {
+        throw new Error(`EmailJS returned status: ${result.status}`);
+      }
+    } catch (error) {
+      console.error("Email sending error:", error);
+      console.error("Error details:", {
+        message: error.message,
+        text: error.text,
+        status: error.status,
+        fullError: JSON.stringify(error, Object.getOwnPropertyNames(error))
+      });
+      
+      // Extract error message
+      let detailedError = copy.form.error;
+      if (error.message) {
+        detailedError = error.message;
+      } else if (error.text) {
+        detailedError = error.text;
+      } else if (typeof error === 'string') {
+        detailedError = error;
+      } else {
+        detailedError = "Unknown error. Check console for details.";
+      }
+      
+      setErrorMessage(detailedError);
+      setSubmitStatus("error");
+      
+      // Clear error message after 8 seconds
+      setTimeout(() => {
+        setSubmitStatus(null);
+        setErrorMessage("");
+      }, 8000);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -209,12 +305,46 @@ export default function Contact() {
 
             <motion.button
               type="submit"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="w-full py-4 bg-gradient-to-r from-blue-500 to-purple-500 rounded-lg font-semibold text-lg"
+              disabled={isSubmitting}
+              whileHover={!isSubmitting ? { scale: 1.05 } : {}}
+              whileTap={!isSubmitting ? { scale: 0.95 } : {}}
+              className={`w-full py-4 rounded-lg font-semibold text-lg transition-all ${
+                isSubmitting
+                  ? "bg-gray-600 cursor-not-allowed opacity-70"
+                  : "bg-gradient-to-r from-blue-500 to-purple-500 hover:shadow-lg hover:shadow-blue-500/50"
+              }`}
             >
-              {copy.form.submit}
+              {isSubmitting ? copy.form.sending : copy.form.submit}
             </motion.button>
+
+            {/* Status Messages */}
+            {submitStatus === "success" && (
+              <motion.div
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="p-4 rounded-lg bg-green-500/20 border border-green-500/50 text-green-400"
+              >
+                ✓ {copy.form.success}
+              </motion.div>
+            )}
+
+            {submitStatus === "error" && (
+              <motion.div
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="p-4 rounded-lg bg-red-500/20 border border-red-500/50 text-red-400 space-y-2"
+              >
+                <div className="font-semibold">✗ {copy.form.error}</div>
+                {errorMessage && (
+                  <div className="text-sm text-red-300/80 mt-2">
+                    {copy.form.errorDetails} {errorMessage}
+                  </div>
+                )}
+                <div className="text-xs text-red-300/60 mt-2">
+                  Make sure your EmailJS credentials are set in .env.local file.
+                </div>
+              </motion.div>
+            )}
           </motion.form>
         </div>
       </div>
