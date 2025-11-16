@@ -8,13 +8,13 @@ const footerCopy = {
   en: {
     title: "Temuulen Norovpel",
     subtitle: "Full-Stack & Mobile App Developer",
-    rights: "© 2024 Temuulen Norovpel. All rights reserved.",
+    rights: "© 2025 Temuulen Norovpel. All rights reserved.",
     socials: ["GitHub", "LinkedIn", "Twitter"],
   },
   mn: {
     title: "Тэмүүлэн Норовпэл",
     subtitle: "Full-Stack болон гар утасны хөгжүүлэгч",
-    rights: "© 2024 Тэмүүлэн Норовпэл. Бүх эрх хуулиар хамгаалагдсан.",
+    rights: "© 2025 Тэмүүлэн Норовпэл. Бүх эрх хуулиар хамгаалагдсан.",
     socials: ["GitHub", "LinkedIn", "Twitter"],
   },
 };
