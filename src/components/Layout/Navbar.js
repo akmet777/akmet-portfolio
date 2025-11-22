@@ -1,6 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image"; // Import Image component
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { useLanguage } from "../../context/LanguageContext";
@@ -36,6 +37,15 @@ export default function Navbar() {
   const pathname = usePathname();
   const { language, toggleLanguage } = useLanguage();
   const navItems = navCopy[language].items;
+
+  // Scroll handler
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   // Prevent body scroll when sidebar is open
   useEffect(() => {
@@ -116,19 +126,26 @@ export default function Navbar() {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
         <div className="flex justify-between items-center py-4">
-          {/* Logo */}
+          {/* Logo Section */}
           <Link href="/">
             <motion.div
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="relative group"
+              className="relative group flex items-center"
             >
+              {/* Glow Effect behind logo */}
               <div className="absolute inset-0 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-lg blur-md group-hover:blur-lg transition-all duration-300 opacity-0 group-hover:opacity-100"></div>
-              <div className="relative flex items-center gap-2 px-3 py-2 rounded-lg bg-gradient-to-r from-blue-500/10 to-purple-500/10 border border-white/10 backdrop-blur-sm">
-                <div className="w-8 h-8 rounded-lg bg-gradient-to-r from-blue-500 to-purple-500 flex items-center justify-center">
-                  <span className="text-white font-bold text-sm">TN</span>
-                </div>
-                <span className="text-white font-semibold text-sm hidden lg:block">Temuulen</span>
+              
+              {/* Logo Image */}
+              <div className="relative z-10">
+                <Image
+                  src="/logo.png"
+                  alt="Logo"
+                  width={120} // Intrinsic width - adjust based on your actual logo file ratio
+                  height={40} // Intrinsic height
+                  className="h-10 w-auto object-contain" // Keeps height fixed at 2.5rem (10), width adjusts automatically
+                  priority
+                />
               </div>
             </motion.div>
           </Link>
@@ -177,10 +194,10 @@ export default function Navbar() {
                 </motion.div>
               </Link>
             ))}
-            
+
             {/* Divider */}
             <div className="h-6 w-px bg-white/10 mx-2"></div>
-            
+
             {/* Language Toggle */}
             <motion.button
               whileHover={{ scale: 1.05, y: -2 }}
@@ -258,12 +275,15 @@ export default function Navbar() {
                 {/* Sidebar Header */}
                 <div className="flex items-center justify-between p-6 border-b border-white/10">
                   <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 flex items-center justify-center">
-                      <span className="text-white font-bold text-lg">TN</span>
-                    </div>
-                    <div>
-                      <div className="text-white font-semibold">Temuulen</div>
-                      <div className="text-xs text-gray-400">Developer</div>
+                    {/* Mobile Logo */}
+                    <div className="relative h-10 w-auto">
+                      <Image
+                        src="/logo.png"
+                        alt="Logo"
+                        width={100}
+                        height={40}
+                        className="h-10 w-auto object-contain"
+                      />
                     </div>
                   </div>
                   <motion.button
@@ -296,7 +316,10 @@ export default function Navbar() {
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ delay: index * 0.1 }}
                     >
-                      <Link href={item.path} onClick={() => setIsMobileMenuOpen(false)}>
+                      <Link
+                        href={item.path}
+                        onClick={() => setIsMobileMenuOpen(false)}
+                      >
                         <motion.div
                           whileHover={{ x: 8, scale: 1.02 }}
                           whileTap={{ scale: 0.98 }}
