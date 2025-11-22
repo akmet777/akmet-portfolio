@@ -1,9 +1,8 @@
-// components/Terminal.js
 "use client";
 import { useState, useEffect, useRef } from "react";
 import { useLanguage } from "../context/LanguageContext";
 
-// Import data from existing components
+// Updated data matching your latest projectsCopy
 const projectsData = {
   en: [
     {
@@ -14,11 +13,11 @@ const projectsData = {
       role: "Full Stack Developer",
     },
     {
-      title: "Woman SOS App",
-      description: "Emergency mobile app with location sharing and quick alert system",
-      tech: ["Flutter", "Firebase", "Google Maps API"],
-      status: "Hackathon Project",
-      role: "Mobile Developer",
+      title: "TayoAi - AI Portrait & Social App",
+      description: "Next-gen social platform powered by Stable Diffusion. Generates unique AI portraits and features a full social ecosystem.",
+      tech: ["React Native", "Stable Diffusion", "Node.js", "Firebase Auth"],
+      status: "MVP / Personal Project",
+      role: "Full Stack Developer",
     },
     {
       title: "Level Up Today",
@@ -28,11 +27,11 @@ const projectsData = {
       role: "Full Stack Developer",
     },
     {
-      title: "IoT Smart Home System",
-      description: "Mini IoT project for home automation and monitoring",
-      tech: ["Arduino", "Node.js", "React"],
+      title: "Closer - Couples Connection API",
+      description: "Secure backend API for a couples' app featuring JWT auth, daily questions, and mood tracking.",
+      tech: ["Node.js", "Express.js", "MongoDB", "JWT"],
       status: "Completed",
-      role: "IoT Developer",
+      role: "Backend Developer",
     },
   ],
   mn: [
@@ -44,25 +43,25 @@ const projectsData = {
       role: "Full Stack хөгжүүлэгч",
     },
     {
-      title: "Woman SOS апп",
-      description: "Байршил хуваалцах, яаралтай дохио илгээх боломжтой хамгаалалтын мобайл апп",
-      tech: ["Flutter", "Firebase", "Google Maps API"],
-      status: "Хакатоны төсөл",
-      role: "Мобайл хөгжүүлэгч",
+      title: "TayoAi - AI Хөрөг & Сошиал Апп",
+      description: "Stable Diffusion ашиглан хиймэл оюун ухаанаар зураг бүтээж, бусадтай хуваалцах боломжтой сошиал платформ.",
+      tech: ["React Native", "Stable Diffusion", "Node.js", "Firebase"],
+      status: "MVP / Хувийн төсөл",
+      role: "Full Stack хөгжүүлэгч",
     },
     {
       title: "Level Up Today",
-      description: "Зорилго болон зуршлын хяналттай, өдөр тутмын статистик, ахицын самбартай мобайл апп",
+      description: "Зорилго, зуршил хянах, өдөр тутмын статистик болон ахицын самбартай мобайл апп",
       tech: ["Flutter", "Firebase", "Provider"],
       status: "Хөгжүүлэлт үргэлжилж байна",
       role: "Full Stack хөгжүүлэгч",
     },
     {
-      title: "IoT Ухаалаг гэрийн систем",
-      description: "Гэрийн автоматжуулалт болон хяналтын мини IoT төсөл",
-      tech: ["Arduino", "Node.js", "React"],
+      title: "Closer - Хосуудын холбоо API",
+      description: "Хосуудын апп-д зориулсан бат бөх backend API. JWT нэвтрэлт, сэтгэл санаа хянах функцтэй.",
+      tech: ["Node.js", "Express.js", "MongoDB", "JWT"],
       status: "Дууссан",
-      role: "IoT хөгжүүлэгч",
+      role: "Backend хөгжүүлэгч",
     },
   ],
 };
@@ -109,32 +108,32 @@ const experienceData = {
       company: "Таны компани",
       period: "2024–2025",
       description: [
-        "Next.js-ээр лэндинг болон дотоод хэрэгсэл хөгжүүлсэн",
-        "Захиалагч бүрт зориулсан админ самбар бүтээсэн",
-        "Гүйцэтгэл, UI/UX-ийг тасралтгүй сайжруулсан",
-        "Жижиг инженерийн багтай нягт хамтран ажилласан",
+        "Next.js ашиглан байгууллагын веб болон дотоод системүүдийг хөгжүүлсэн",
+        "Харилцагчдад зориулсан админ удирдлагын самбар бүтээсэн",
+        "Системийн хурд болон хэрэглэгчийн туршлагыг (UI/UX) сайжруулсан",
+        "Инженерийн багтай нягт хамтран ажилласан",
       ],
     },
     {
       role: "Мобайл апп хөгжүүлэгч",
-      company: "Фриланс",
+      company: "Чөлөөт уран бүтээлч (Freelance)",
       period: "2023–2024",
       description: [
-        "Олон төрлийн захиалагчдад Flutter апп хөгжүүлсэн",
-        "Firebase интеграци хэрэгжүүлсэн",
-        "Play Store дээр апп нийтэлсэн",
-        "REST API болон state management-тай ажилласан",
+        "Захиалгат Flutter аппликейшнүүд хөгжүүлсэн",
+        "Firebase болон бусад гуравдагч системүүдтэй холболт хийсэн",
+        "Google Play Store дээр аппликейшн нийтэлсэн",
+        "REST API болон State management ашиглан цогц шийдэл гаргасан",
       ],
     },
     {
       role: "Вэб хөгжүүлэгч",
-      company: "Фриланс",
+      company: "Чөлөөт уран бүтээлч (Freelance)",
       period: "2022–2023",
       description: [
-        "React/Next.js ашиглан responsive вэбсайт бүтээсэн",
-        "Орчин үеийн UI/UX дизайн хэрэгжүүлсэн",
-        "Олон платформ дээр апп deploy хийсэн",
-        "Дизайнер болон захиалагчтай хамтран ажилласан",
+        "React/Next.js ашиглан бүх төрлийн төхөөрөмжид нийцэх вэбсайт бүтээсэн",
+        "Орчин үеийн UI/UX шийдлүүдийг нэвтрүүлсэн",
+        "Вэбсайтуудыг төрөл бүрийн платформ дээр байршуулсан (Deploy)",
+        "Дизайнер болон захиалагчтай нягт хамтран ажилласан",
       ],
     },
   ],
@@ -143,7 +142,7 @@ const experienceData = {
 const terminalCopy = {
   en: {
     welcome: "Welcome to Temuulen's Portfolio Terminal",
-    prompt: "visitor@portfolio:~$", // Always English
+    prompt: "visitor@portfolio:~$",
     help: {
       title: "Available Commands:",
       commands: [
@@ -180,9 +179,8 @@ const terminalCopy = {
     contact: {
       title: "Contact Information",
       content: [
-        "Email: [Your Email]",
-        "LinkedIn: [Your LinkedIn]",
-        "GitHub: [Your GitHub]",
+        "Email: norovpeltemuulen@gmail.com",
+        "GitHub: https://github.com/akmet777",
         "",
         "Feel free to reach out!",
       ],
@@ -192,29 +190,29 @@ const terminalCopy = {
   },
   mn: {
     welcome: "Тэмүүлэний Портфолио Терминалд тавтай морил",
-    prompt: "visitor@portfolio:~$", // Always English even in Mongolian
+    prompt: "visitor@portfolio:~$",
     help: {
       title: "Боломжтой командууд:",
       commands: [
-        { cmd: "help", desc: "Энэ тусламжийн мэссэж харуулах" },
+        { cmd: "help", desc: "Тусламж цэсийг харуулах" },
         { cmd: "clear", desc: "Терминалыг цэвэрлэх" },
         { cmd: "projects", desc: "Бүх төслүүдийг жагсаах" },
-        { cmd: "experience", desc: "Ажлын туршлага харуулах" },
-        { cmd: "about", desc: "Миний тухай" },
+        { cmd: "experience", desc: "Ажлын туршлага харах" },
+        { cmd: "about", desc: "Миний тухай мэдээлэл" },
         { cmd: "skills", desc: "Техникийн ур чадварууд" },
         { cmd: "contact", desc: "Холбоо барих мэдээлэл" },
         { cmd: "exit", desc: "Терминал горимоос гарах" },
       ],
     },
     about: {
-      title: "Тэмүүлэн Норовпэлийн тухай",
+      title: "Норовпэлийн Тэмүүлэн",
       content: [
         "Full-Stack болон Мобайл апп хөгжүүлэгч",
         "",
-        "Би санааг бодит бүтээгдэхүүн болгодог хөгжүүлэгч юм.",
-        "Вэб, Мобайл, Автоматжуулалтын шийдлээр мэргэшсэн.",
+        "Би шинэ санааг бодит бүтээгдэхүүн болгон хувиргах чин хүсэлтэй хөгжүүлэгч.",
+        "Вэб, Мобайл болон Автоматжуулалтын системээр мэргэшсэн.",
         "",
-        "Ур чадвар: Next.js, React, Flutter, Node.js, Firebase, болон бусад.",
+        "Технологи: Next.js, React, Flutter, Node.js, Firebase болон бусад.",
       ],
     },
     skills: {
@@ -222,22 +220,22 @@ const terminalCopy = {
       categories: {
         frontend: ["Next.js", "React", "Tailwind CSS", "HTML/CSS/JS", "TypeScript"],
         backend: ["Node.js", "Express.js", "REST API", "MongoDB", "Firebase"],
-        mobile: ["Flutter", "Dart", "Firebase интеграци", "Real-time Apps"],
-        other: ["UI/UX дизайн", "IoT үндэс", "Төслийн менежмент", "Deployment"],
+        mobile: ["Flutter", "Dart", "Firebase Integration", "Real-time Apps"],
+        other: ["UI/UX Дизайн", "IoT Үндэс", "Төслийн менежмент", "Deployment"],
       },
     },
     contact: {
-      title: "Холбоо барих мэдээлэл",
+      title: "Холбоо барих",
       content: [
-        "Имэйл: [Таны имэйл]",
-        "LinkedIn: [Таны LinkedIn]",
-        "GitHub: [Таны GitHub]",
+        "Имэйл: norovpeltemuulen@gmail.com",
+   
+        "GitHub: https://github.com/akmet777",
         "",
-        "Холбогдохыг урьж байна!",
+        "Хамтран ажиллахад үргэлж нээлттэй!",
       ],
     },
     error: "Команд олдсонгүй. 'help' гэж бичээд боломжтой командуудыг харна уу.",
-    exit: "Терминалаас гараж байна... Нүүр хуудас руу шилжиж байна.",
+    exit: "Терминалаас гарч байна... Нүүр хуудас руу шилжиж байна.",
   },
 };
 
@@ -456,4 +454,3 @@ export default function Terminal() {
     </div>
   );
 }
-
