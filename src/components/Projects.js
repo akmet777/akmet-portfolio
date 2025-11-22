@@ -17,15 +17,19 @@ const projectsCopy = {
         status: "Working Product",
         role: "Full Stack Developer",
         gradient: "from-blue-500 to-purple-600",
+        demoUrl: "https://tsetseg-client.vercel.app/",
+        repoUrl: "https://github.com/temuulen/ecommerce-platform",
       },
       {
-        title: "Woman SOS App",
+        title: "TayoAi - AI Portrait & Social App",
         description:
-          "Emergency mobile app with location sharing and quick alert system",
-        tech: ["Flutter", "Firebase", "Google Maps API"],
-        status: "Hackathon Project",
-        role: "Mobile Developer",
-        gradient: "from-red-500 to-pink-500",
+          "A next-gen social platform powered by Stable Diffusion. Generates unique AI portraits from user inputs and features a full social ecosystem with secure authentication and community feeds.",
+        tech: ["Flutter", "Stable Diffusion", "Node.js", "Firebase Auth"],
+        status: "MVP / Personal Project",
+        role: "Full Stack Developer",
+        gradient: "from-violet-600 to-indigo-500",
+        demoUrl: "https://github.com/akmet0802/TayoAi.git",
+        repoUrl: "https://github.com/akmet0802/TayoAi.git",
       },
       {
         title: "Level Up Today",
@@ -35,14 +39,19 @@ const projectsCopy = {
         status: "In Development",
         role: "Full Stack Developer",
         gradient: "from-green-500 to-teal-400",
+        demoUrl: "https://github.com/akmet777/level_up_today",
+        repoUrl: "https://github.com/akmet777/level_up_today",
       },
       {
-        title: "IoT Smart Home System",
-        description: "Mini IoT project for home automation and monitoring",
-        tech: ["Arduino", "Node.js", "React"],
+        title: "Closer - Couples Connection Backend API",
+        description:
+          "Secure backend API for a couples' connection app, featuring JWT authentication, daily questions, mood tracking, and a shared memory feed. Built for long-distance relationships.",
+        tech: ["Node.js", "Express.js", "MongoDB", "JWT", "Nodemailer"],
         status: "Completed",
-        role: "IoT Developer",
-        gradient: "from-orange-500 to-yellow-500",
+        role: "Backend Developer",
+        gradient: "from-fuchsia-500 to-indigo-600",
+        demoUrl: "https://github.com/akmet777/Closer_backend",
+        repoUrl: "https://github.com/akmet777/Closer_backend",
       },
     ],
   },
@@ -59,15 +68,19 @@ const projectsCopy = {
         status: "Ажиллаж буй бүтээгдэхүүн",
         role: "Full Stack хөгжүүлэгч",
         gradient: "from-blue-500 to-purple-600",
+        demoUrl: "https://tsetseg-client.vercel.app/",
+        repoUrl: "https://github.com/temuulen/ecommerce-platform",
       },
       {
-        title: "Woman SOS апп",
+        title: "TayoAi - AI Хөрөг & Сошиал Апп",
         description:
-          "Байршил хуваалцах, яаралтай дохио илгээх боломжтой хамгаалалтын мобайл апп",
-        tech: ["Flutter", "Firebase", "Google Maps API"],
-        status: "Хакатоны төсөл",
-        role: "Мобайл хөгжүүлэгч",
-        gradient: "from-red-500 to-pink-500",
+          "Stable Diffusion модел ашиглан хиймэл оюун ухаанаар зураг бүтээж, бусадтай хуваалцах боломжтой сошиал платформ. Хэрэглэгчийн бүртгэл, нууцлал болон 'Feed' хэсгийг бүрэн шийдсэн.",
+        tech: ["Flutter", "Stable Diffusion", "Node.js", "Firebase Auth"],
+        status: "MVP / Хувийн төсөл",
+        role: "Full Stack хөгжүүлэгч",
+        gradient: "from-violet-600 to-indigo-500",
+        demoUrl: "https://github.com/akmet0802/TayoAi.git",
+        repoUrl: "https://github.com/akmet0802/TayoAi.git",
       },
       {
         title: "Level Up Today",
@@ -77,21 +90,23 @@ const projectsCopy = {
         status: "Хөгжүүлэлт үргэлжилж байна",
         role: "Full Stack хөгжүүлэгч",
         gradient: "from-green-500 to-teal-400",
+        demoUrl: "https://github.com/akmet777/level_up_today",
+        repoUrl: "https://github.com/akmet777/level_up_today",
       },
       {
-        title: "IoT Ухаалаг гэрийн систем",
+        title: "Closer - Хосуудын холбоо API",
         description:
-          "Гэрийн автоматжуулалт болон хяналтын зориулалттай жижиг оврын IoT туршилтын систем",
-        tech: ["Arduino", "Node.js", "React"],
+          "Холын зайн харилцааг бэхжүүлэх зорилготой хосуудын апп-д зориулсан аюулгүй, бат бөх backend API. JWT нэвтрэлт, өдөр тутмын асуулт, сэтгэл санаа хянах, дурсамжийн сантай.",
+        tech: ["Node.js", "Express.js", "MongoDB", "JWT", "Nodemailer"],
         status: "Дууссан",
-        role: "IoT хөгжүүлэгч",
-        gradient: "from-orange-500 to-yellow-500",
+        role: "Backend хөгжүүлэгч",
+        gradient: "from-fuchsia-500 to-indigo-600",
+        demoUrl: "https://github.com/akmet777/Closer_backend",
+        repoUrl: "https://github.com/akmet777/Closer_backend",
       },
     ],
   },
 };
-
-
 export default function Projects() {
   const { language } = useLanguage();
   const copy = projectsCopy[language];
@@ -142,20 +157,42 @@ export default function Projects() {
                 </div>
 
                 <div className="flex gap-4">
-                  <motion.button
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    className="flex-1 py-2 rounded-lg text-center border border-white/10 bg-white/5 hover:bg-white/10 transition-colors"
+                  <motion.a
+                    whileHover={{ scale: project.demoUrl ? 1.05 : 1 }}
+                    whileTap={{ scale: project.demoUrl ? 0.95 : 1 }}
+                    href={project.demoUrl || "#"}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={(e) => {
+                      if (!project.demoUrl) e.preventDefault();
+                    }}
+                    aria-disabled={!project.demoUrl}
+                    className={`flex-1 py-2 rounded-lg text-center border border-white/10 transition-colors ${
+                      project.demoUrl
+                        ? "bg-white/5 hover:bg-white/10"
+                        : "bg-white/5 opacity-50 cursor-not-allowed pointer-events-none"
+                    }`}
                   >
                     {copy.buttons.demo}
-                  </motion.button>
-                  <motion.button
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    className="flex-1 py-2 rounded-lg text-center border border-white/10 bg-white/10 hover:bg-white/20 transition-colors"
+                  </motion.a>
+                  <motion.a
+                    whileHover={{ scale: project.repoUrl ? 1.05 : 1 }}
+                    whileTap={{ scale: project.repoUrl ? 0.95 : 1 }}
+                    href={project.repoUrl || "#"}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={(e) => {
+                      if (!project.repoUrl) e.preventDefault();
+                    }}
+                    aria-disabled={!project.repoUrl}
+                    className={`flex-1 py-2 rounded-lg text-center border border-white/10 transition-colors ${
+                      project.repoUrl
+                        ? "bg-white/10 hover:bg-white/20"
+                        : "bg-white/10 opacity-50 cursor-not-allowed pointer-events-none"
+                    }`}
                   >
                     {copy.buttons.repo}
-                  </motion.button>
+                  </motion.a>
                 </div>
               </div>
             </motion.div>

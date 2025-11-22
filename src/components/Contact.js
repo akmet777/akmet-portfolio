@@ -13,7 +13,7 @@ const contactCopy = {
     responseText:
       "I typically respond to emails within 24 hours. For urgent matters, feel free to connect with me on social media.",
     cards: [
-      { icon: "📧", label: "Email", value: "temuulen@example.com" },
+      { icon: "📧", label: "Email", value: "norovpeltemuulen@gmail.com" },
       { icon: "📍", label: "Location", value: "Ulaanbaatar, Mongolia" },
       { icon: "💼", label: "Availability", value: "Open for new projects" },
     ],
@@ -42,9 +42,9 @@ const contactCopy = {
     responseText:
       "И-мэйлд ихэвчлэн 24 цагийн дотор хариу өгдөг. Яаралтай бол сошиал сувгаар холбогдоорой.",
     cards: [
-      { icon: "📧", label: "Имэйл", value: "temuulen@example.com" },
+      { icon: "📧", label: "Имэйл", value: "norovpeltemuulen@gmail.com" },
       { icon: "📍", label: "Байршил", value: "Улаанбаатар, Монгол" },
-      { icon: "💼", label: "Завтай байдал", value: "Шинэ төслүүдэд нээлттэй" },
+      { icon: "💼", label: "Статус", value: "Шинэ төслүүдэд нээлттэй" },
     ],
     form: {
       name: "Нэр",
@@ -53,7 +53,7 @@ const contactCopy = {
       message: "Мессеж",
       placeholders: {
         name: "Таны нэр",
-        email: "tanai.mail@example.com",
+        email: "Таны имэйл хаяг",
         subject: "Төслийн санал",
         message: "Төслийнхөө талаар бичээрэй...",
       },

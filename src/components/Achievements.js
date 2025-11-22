@@ -3,11 +3,16 @@
 
 import { motion } from "framer-motion";
 import { useLanguage } from "../context/LanguageContext";
-
 const achievementsCopy = {
   en: {
     heading: { lead: "My ", accent: "Achievements" },
     cards: [
+      {
+        title: "1st Place – HackaTeen National Hackathon",
+        description: "Won Mongolia’s biggest high-school hackathon",
+        year: "2023",
+        icon: "⚡",
+      },
       {
         title: "4th Place in National AI Hackathon",
         description: "Competed against top developers nationwide",
@@ -15,10 +20,10 @@ const achievementsCopy = {
         icon: "🏆",
       },
       {
-        title: "Multiple Hackathon Wins",
-        description: "Won several national-level hackathons",
-        year: "2023-2024",
-        icon: "🚀",
+        title: "Cisco Cybersecurity Essentials Certificate",
+        description: "Completed foundational cybersecurity training",
+        year: "2023",
+        icon: "🛡️",
       },
       {
         title: "Google Project Management Certificate",
@@ -38,17 +43,17 @@ const achievementsCopy = {
         year: "2022",
         icon: "⭐",
       },
-      {
-        title: "Nest Education Full Scholarship",
-        description: "Full scholarship for IT education",
-        year: "2022",
-        icon: "🎓",
-      },
     ],
   },
   mn: {
     heading: { lead: "Миний ", accent: "амжилт" },
     cards: [
+      {
+        title: "HackaTeen улсын хакатон – 1-р байр",
+        description: "Монголын хамгийн том ахлах ангийн хакатонд түрүүлсэн",
+        year: "2023",
+        icon: "⚡",
+      },
       {
         title: "Үндэсний AI хакатон – 4-р байр",
         description: "Улсын шилдэг хөгжүүлэгчидтэй өрсөлдсөн",
@@ -56,10 +61,10 @@ const achievementsCopy = {
         icon: "🏆",
       },
       {
-        title: "Олон хакатоны ялагч",
-        description: "Үндэсний түвшний хэд хэдэн хакатонд түрүүлсэн",
-        year: "2023-2024",
-        icon: "🚀",
+        title: "Cisco Cybersecurity Essentials сертификат",
+        description: "Кибер аюулгүй байдлын үндсэн сургалтыг дүүргэсэн",
+        year: "2023",
+        icon: "🛡️",
       },
       {
         title: "Google Project Management сертификат",
@@ -78,12 +83,6 @@ const achievementsCopy = {
         description: "Сургалтын өндөр амжилтаар шагнуулсан",
         year: "2022",
         icon: "⭐",
-      },
-      {
-        title: "Nest Education бүтэн тэтгэлэг",
-        description: "Мэдээллийн технологийн боловсролд олгогдсон бүтэн тэтгэлэг",
-        year: "2022",
-        icon: "🎓",
       },
     ],
   },
@@ -136,4 +135,3 @@ export default function Achievements() {
     </section>
   );
 }
-// components/Achievements.js

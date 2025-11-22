@@ -10,8 +10,8 @@ const experienceCopy = {
     roles: [
       {
         role: "Software Developer",
-        company: "Your Company Name",
-        period: "2024–2025",
+        company: "TanuSoft",
+        period: "2025",
         description: [
           "Built landing pages and internal tools using Next.js",
           "Created custom admin panels for clients",
@@ -22,9 +22,10 @@ const experienceCopy = {
       {
         role: "Mobile App Developer",
         company: "Freelance",
-        period: "2023–2024",
+        period: "2024",
         description: [
           "Developed Flutter applications for various clients",
+          "Built Memo Chat — a personal AI-powered chat/journal app",
           "Implemented Firebase integration",
           "Published apps on Play Store",
           "Worked with REST APIs and state management",
@@ -48,8 +49,8 @@ const experienceCopy = {
     roles: [
       {
         role: "Програм хангамжийн инженер",
-        company: "Таны компани",
-        period: "2024–2025",
+        company: "Танусофт",
+        period: "2025",
         description: [
           "Next.js-ээр лэндинг болон дотоод хэрэгсэл хөгжүүлсэн",
           "Захиалагч бүрт зориулсан админ самбар бүтээсэн",
@@ -63,6 +64,7 @@ const experienceCopy = {
         period: "2023–2024",
         description: [
           "Flutter аппуудыг олон төрлийн захиалагчдад бүтээсэн",
+          "Memo Chat — хувийн AI чат/тэмдэглэл хөтлөх аппыг бүтээсэн",
           "Firebase интеграци, нотификаци, аналитикийг хэрэгжүүлсэн",
           "Play Store-д апп байршуулж, шинэчлэлт гаргасан",
           "REST API болон state management ашигласан",

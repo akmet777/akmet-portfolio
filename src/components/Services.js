@@ -7,11 +7,7 @@ const servicesCopy = {
   en: {
     heading: { lead: "My ", accent: "Services" },
     includeLabel: "Includes:",
-    quoteCta: "Get Quote",
-    consultingTitle: "Consulting Services",
-    consultingDesc:
-      "Hourly consulting for technical advice, code reviews, and project planning",
-    consultingCta: "Schedule Consultation",
+    quoteCta: "Let's Start",
     cards: [
       {
         title: "Custom Landing Pages + CMS",
@@ -64,14 +60,11 @@ const servicesCopy = {
       },
     ],
   },
+
   mn: {
     heading: { lead: "Миний ", accent: "үйлчилгээ" },
     includeLabel: "Багцад:",
-    quoteCta: "Үнэ авах",
-    consultingTitle: "Зөвлөгөөний үйлчилгээ",
-    consultingDesc:
-      "Техникийн зөвлөгөө, кодын хяналт, төслийн төлөвлөлтийн цагийн үйлчилгээ",
-    consultingCta: "Зөвлөгөө товлох",
+    quoteCta: "Эхлэх",
     cards: [
       {
         title: "Лэндинг + CMS хөгжүүлэлт",
@@ -113,7 +106,7 @@ const servicesCopy = {
       {
         title: "Бизнесийн тусгай систем",
         description: "Танай хэрэглээнд нийцсэн дижитал шийдэл",
-        price: "Захиалгат үнэ",
+        price: "Үнэ тохиролцоно",
         features: [
           "Вэб аппликейшн",
           "Автоматжуулалтын хэрэгсэл",
@@ -179,6 +172,12 @@ export default function Services() {
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                     className="px-6 py-3 rounded-lg border border-white/10 bg-white/5 hover:bg-white/10 transition-colors shadow-lg shadow-blue-500/5"
+                    onClick={() => {
+                      const contactSection = document.getElementById("contact");
+                      if (contactSection) {
+                        contactSection.scrollIntoView({ behavior: "smooth" });
+                      }
+                    }}
                   >
                     {copy.quoteCta}
                   </motion.button>
@@ -187,23 +186,6 @@ export default function Services() {
             </motion.div>
           ))}
         </div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.6 }}
-          className="text-center mt-12 p-8 rounded-2xl bg-slate-900/80 border border-white/10 shadow-2xl shadow-purple-500/10 backdrop-blur-2xl"
-        >
-          <h3 className="text-2xl font-bold mb-4">{copy.consultingTitle}</h3>
-          <p className="text-gray-300 mb-6">{copy.consultingDesc}</p>
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="px-8 py-4 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full font-semibold"
-          >
-            {copy.consultingCta}
-          </motion.button>
-        </motion.div>
       </div>
     </section>
   );
