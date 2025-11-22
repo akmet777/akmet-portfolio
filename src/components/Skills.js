@@ -101,7 +101,7 @@ const skillsCopy = {
         color: "from-green-500 to-emerald-500",
       },
       mobile: {
-        title: "Гар утасны хөгжүүлэлт",
+        title: "Апп хөгжүүлэлт",
         skills: [
           "Flutter",
           "Dart",
